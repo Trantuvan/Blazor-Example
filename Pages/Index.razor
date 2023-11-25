@@ -1,11 +1,13 @@
 @page "/"
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
 
 <div class="main">
     <h1>Blazing Pizzas</h1>
     <ul class="pizza-cards">
-        @if(specials == null)
+        @if (specials == null)
             return;
-        @foreach(var special in specials)
+        @foreach (var special in specials)
         {
             <li style="background-image: url('@special.ImageUrl');">
                 <div class="pizza-info">
