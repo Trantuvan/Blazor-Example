@@ -47,14 +47,16 @@
         Total:
         <span class="total-price">@order.GetFormattedTotalPrice()</span>
         <a href="checkout" class="@(order.Pizzas.Count() == 0 ? "btn btn-warning disabled":"btn btn-warning")">
-            Order ></a>
+            Order >
+        </a>
     </div>
 </div>
 
 @if (OrderState.ShowingConfigureDialog)
 {
-    <ConfigurePizzaDialog Pizza="OrderState.ConfiguringPizza" OnCancelled="OrderState.CancelConfiguringPizzaDialog"
-        OnConfirmed="OrderState.ConfirmConfiguringPizzaDialog" />
+    <ConfigurePizzaDialog Pizza="OrderState.ConfiguringPizza"
+                          OnCancelled="OrderState.CancelConfiguringPizzaDialog"
+                          OnConfirmed="OrderState.ConfirmConfiguringPizzaDialog" />
 }
 
 @code {
