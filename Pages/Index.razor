@@ -38,6 +38,7 @@
                 <div class="cart-item">
                     <div class="title">@configuredPizza.Size" @configuredPizza.Special.Name</div>
                     <div class="item-price">@configuredPizza.GetFormattedTotalPrice()</div>
+                    <a class="delete-item" @onclick="()=>OrderState.RemoveConfiguredPizza(configuredPizza)">x</a>
                 </div>
             }
         </div>
