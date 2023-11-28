@@ -6,13 +6,19 @@
 @inject OrderState OrderState
 
 <div class="top-bar">
-    <a href="/" class="logo">
-        <img src="img/logo.svg" alt="logo">
-    </a>
-    <a href="/" class="nav-tab active">
-        <img src="img/pizza-slice.svg" alt="pizza-slice">
+    <NavLink class="logo" href="">
+        <img src="img/logo.svg" />
+    </NavLink>
+
+    <NavLink href="" class="nav-tab" Match="NavLinkMatch.All">
+        <img src="img/pizza-slice.svg" />
         <div>Get Pizza</div>
-    </a>
+    </NavLink>
+
+    <NavLink href="myorders" class="nav-tab">
+        <img src="img/bike.svg" />
+        <div>My Orders</div>
+    </NavLink>
 </div>
 
 <div class="main">
@@ -22,14 +28,14 @@
             return;
         @foreach (var special in specials)
         {
-            <li style="background-image: url('@special.ImageUrl');"
-                @onclick="()=>OrderState.ShowingConfigurePizzaDialog(special)">
-                <div class="pizza-info">
-                    <span class="title">@special.Name</span>
+                <li style="background-image: url('@special.ImageUrl');"
+                    @onclick="()=>OrderState.ShowingConfigurePizzaDialog(special)">
+                    <div class="pizza-info">
+                        <span class="title">@special.Name</span>
                     @special.Description
-                    <span class="price">@special.GetFormattedBasePrice()</span>
-                </div>
-            </li>
+                        <span class="price">@special.GetFormattedBasePrice()</span>
+                    </div>
+                </li>
         }
     </ul>
 </div>
@@ -37,21 +43,21 @@
 <div class="sidebar">
     @if (order.Pizzas.Any() == false)
     {
-        <div class="empty-cart">Choose a pizza <br /> to get started</div>
+            <div class="empty-cart">Choose a pizza <br /> to get started</div>
     }
     else
     {
-        <div class="order-contents">
-            <h2>Your Order</h2>
+            <div class="order-contents">
+                <h2>Your Order</h2>
             @foreach (var configuredPizza in order.Pizzas)
             {
-                <div class="cart-item">
-                    <div class="title">@configuredPizza.Size" @configuredPizza.Special.Name</div>
-                    <div class="item-price">@configuredPizza.GetFormattedTotalPrice()</div>
-                    <a class="delete-item" @onclick="()=>OrderState.RemoveConfiguredPizza(configuredPizza)">x</a>
-                </div>
+                        <div class="cart-item">
+                            <div class="title">@configuredPizza.Size" @configuredPizza.Special.Name</div>
+                            <div class="item-price">@configuredPizza.GetFormattedTotalPrice()</div>
+                            <a class="delete-item" @onclick="()=>OrderState.RemoveConfiguredPizza(configuredPizza)">x</a>
+                        </div>
             }
-        </div>
+            </div>
     }
     <div class="order-total @(order.Pizzas.Any() ? "" : "hidden")">
         Total:
@@ -64,9 +70,9 @@
 
 @if (OrderState.ShowingConfigureDialog)
 {
-    <ConfigurePizzaDialog Pizza="OrderState.ConfiguringPizza"
-                          OnCancelled="OrderState.CancelConfiguringPizzaDialog"
-                          OnConfirmed="OrderState.ConfirmConfiguringPizzaDialog" />
+        <ConfigurePizzaDialog Pizza="OrderState.ConfiguringPizza"
+                              OnCancelled="OrderState.CancelConfiguringPizzaDialog"
+                              OnConfirmed="OrderState.ConfirmConfiguringPizzaDialog" />
 }
 
 @code {
