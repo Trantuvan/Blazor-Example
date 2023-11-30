@@ -1,0 +1,25 @@
+﻿<div class="form-field">
+    <label for="address-name">Name:</label>
+    <input type="text" name="address-name" id="address-name" @bind="Address.Name" />
+</div>
+<div class="form-field">
+    <label for="address-line-1">Line 1:</label>
+    <input type="text" name="address-line-1" id="address-line-1" @bind="Address.Line1" />
+</div>
+<div class="form-field">
+    <label for="address-line-2">Line 2:</label>
+    <input type="text" name="address-line-2" id="address-line-2" @bind="Address.Line2" />
+</div>
+<div class="form-field">
+    <label for="region">Region:</label>
+    <input type="text" name="region" id="region" @bind="Address.Region" />
+</div>
+<div class="form-field">
+    <label for="postal">Postal Code:</label>
+    <input type="text" name="postal" id="postal" @bind="Address.PostalCode" />
+</div>
+
+@code {
+    [Parameter]
+    public Address Address { get; set; }
+}
