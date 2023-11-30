@@ -9,20 +9,11 @@
     <div class="checkout-cols">
         <div class="checkout-order-details">
             <h4>Review order</h4>
-            @foreach (var pizza in Order.Pizzas)
-            {
-                <p>
-                    <strong>
-                        @pizza.Size" @pizza.Special.Name (£@pizza.GetFormattedTotalPrice())
-                    </strong>
-                </p>
-            }
-            <p>
-                <strong>
-                    Total price:
-                    £@Order.GetFormattedTotalPrice()
-                </strong>
-            </p>
+            <OrderReview Order="Order" />
+        </div>
+        <div class="checkout-delivery-address">
+            <h4>Deliver to...</h4>
+            <AddressEditor Address="Order.DeliveryAddress" />
         </div>
     </div>
     <button class="checkout-button btn btn-warning" @onclick="PlaceOrder" disabled=@isSubmitting>
@@ -31,9 +22,8 @@
 </div>
 
 @code {
-    private Order Order => OrderState.Order;
     private bool isSubmitting;
-
+    private Order Order => OrderState.Order;
     private async Task PlaceOrder()
     {
         isSubmitting = true;
