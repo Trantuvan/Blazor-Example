@@ -1,6 +1,6 @@
 ﻿<div class="form-field">
     <label for="address-name">Name:</label>
-    <input type="text" name="address-name" id="address-name" @bind="Address.Name" />
+    <input type="text" name="address-name" id="address-name" @bind="Address.Name" @ref="startName" />
 </div>
 <div class="form-field">
     <label for="address-line-1">Line 1:</label>
@@ -22,4 +22,12 @@
 @code {
     [Parameter]
     public Address Address { get; set; }
+
+    private ElementReference startName;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await startName.FocusAsync();
+    }
 }
