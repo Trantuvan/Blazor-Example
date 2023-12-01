@@ -6,7 +6,7 @@
 @inject NavigationManager NavigationManager
 
 <div class="main">
-    <EditForm Model="Order.DeliveryAddress" OnSubmit="CheckSubmission">
+    <EditForm Model="Order.DeliveryAddress" OnValidSubmit="PlaceOrder" OnInvalidSubmit="()=> isError=true">
         <div class="checkout-cols">
             <div class="checkout-order-details">
                 <h4>Review order</h4>
@@ -24,6 +24,7 @@
         <button class="checkout-button btn btn-warning" type="submit" disabled=@isSubmitting>
             Place order
         </button>
+        <DataAnnotationsValidator />
     </EditForm>
 </div>
 
@@ -33,36 +34,11 @@
     private Order Order => OrderState.Order;
     private async Task PlaceOrder()
     {
+        isError = false;
+        isSubmitting = true;
         var response = await HttpClient.PostAsJsonAsync(NavigationManager.BaseUri + "orders", OrderState.Order);
         var newOrderId = await response.Content.ReadFromJsonAsync<int>();
         OrderState.ResetOrder();
         NavigationManager.NavigateTo($"myorders/{newOrderId}");
-    }
-    private async Task CheckSubmission(EditContext editContext)
-    {
-        isSubmitting = true;
-        @* Get Address from editContext.Model *@
-        @* tell compiler Model type object is Address *@
-        @* var model = editContext.Model as Address; *@
-        @* check Model is a valid address -> create a new address *@
-
-        if (editContext.Model is not Address address)
-        {
-            isError = true;
-            isSubmitting = false;
-            return;
-        }
-
-        isError = string.IsNullOrWhiteSpace(address.Name)
-        || string.IsNullOrWhiteSpace(address.Line1)
-        || string.IsNullOrWhiteSpace(address.Line2)
-        || string.IsNullOrWhiteSpace(address.Region)
-        || string.IsNullOrWhiteSpace(address.PostalCode);
-
-        if (!isError)
-        {
-            await PlaceOrder();
-        }
-        isSubmitting = false;
     }
 }
