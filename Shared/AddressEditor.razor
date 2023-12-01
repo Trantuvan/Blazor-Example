@@ -1,22 +1,37 @@
 ﻿<div class="form-field">
     <label for="address-name">Name:</label>
-    <InputText type="text" name="address-name" id="address-name" @bind-Value="Address.Name" />
+    <div>
+        <InputText type="text" name="address-name" id="address-name" @bind-Value="Address.Name" />
+        <ValidationMessage For="()=>Address.Name" />
+    </div>
 </div>
 <div class="form-field">
     <label for="address-line-1">Line 1:</label>
-    <InputText type="text" name="address-line-1" id="address-line-1" @bind-Value="Address.Line1" />
+    <div>
+        <InputText type="text" name="address-line-1" id="address-line-1" @bind-Value="Address.Line1" />
+        <ValidationMessage For="()=>Address.Line1" />
+    </div>
 </div>
 <div class="form-field">
     <label for="address-line-2">Line 2:</label>
-    <InputText type="text" name="address-line-2" id="address-line-2" @bind-Value="Address.Line2" />
+    <div>
+        <InputText type="text" name="address-line-2" id="address-line-2" @bind-Value="Address.Line2" />
+        <ValidationMessage For="()=>Address.Line2" />
+    </div>
 </div>
 <div class="form-field">
     <label for="region">Region:</label>
-    <InputText type="text" name="region" id="region" @bind-Value="Address.Region" />
+    <div>
+        <InputText type="text" name="region" id="region" @bind-Value="Address.Region" />
+        <ValidationMessage For="()=>Address.Region" />
+    </div>
 </div>
 <div class="form-field">
     <label for="postal">Postal Code:</label>
-    <InputText type="text" name="postal" id="postal" @bind-Value="Address.PostalCode" />
+    <div>
+        <InputText type="text" name="postal" id="postal" @bind-Value="Address.PostalCode" />
+        <ValidationMessage For="()=>Address.PostalCode" />
+    </div>
 </div>
 
 @code {
